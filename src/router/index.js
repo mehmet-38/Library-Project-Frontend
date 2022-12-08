@@ -3,6 +3,21 @@ import LoginView from "@/views/LoginView.vue";
 import HomeView from "@/views/HomeView";
 import BookListView from "@/views/BookListView";
 import RegisterView from "@/views/RegisterView";
+import AdminPanel from "@/views/AdminPanel";
+import store from "@/store";
+function guardMyroute(to, from, next) {
+  var isAdmin = false;
+
+  if (store.state.roleState.userRole == "1") isAdmin = true;
+  else isAdmin = false;
+  if (isAdmin) {
+    //console.log(store);
+    next(); // allow to enter route
+  } else {
+    //console.log(store.state.roleState.userRole);
+    next("/login"); // go to '/login';
+  }
+}
 const routes = [
   {
     path: "/login",
@@ -23,6 +38,12 @@ const routes = [
     path: "/register",
     name: "register",
     component: RegisterView,
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    beforeEnter: guardMyroute,
+    component: AdminPanel,
   },
 ];
 

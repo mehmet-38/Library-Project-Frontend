@@ -14,7 +14,9 @@
               {{ book.book_author }}
             </p>
             <p class="card-text text-muted">{{ book.book_type }}</p>
-            <a href="#" class="btn btn-primary">Emanet Al</a>
+            <a style="cursor: pointer" @click="getBook" class="btn btn-primary"
+              >Emanet Al</a
+            >
           </div>
         </div>
       </div>
@@ -23,11 +25,18 @@
 </template>
 <script>
 import appAxios from "@/utils/appAxios";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       bookList: [],
     };
+  },
+  computed: {
+    ...mapState(["loggedUser"]),
+  },
+  created() {
+    this.$store.dispatch("loggedControl");
   },
   mounted() {
     appAxios({
@@ -36,6 +45,13 @@ export default {
     }).then((book_response) => {
       this.bookList = book_response.data;
     });
+  },
+  methods: {
+    getBook() {
+      this.loggedUser
+        ? alert("basarili emanet alma")
+        : alert("lutfen giris yapınız");
+    },
   },
 };
 </script>

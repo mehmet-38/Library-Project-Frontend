@@ -69,10 +69,21 @@ export default {
         data: userObject,
       }).then((response) => {
         localStorage.setItem("userToken", response.data.token);
+
         /*eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWV0QGdtYWlsLmNvbSIsInVzZXJJZCI6IjYzODFlNDhlNDIyNzJhODgyZWUxMDhjZCIsImlhdCI6MTY2OTg5Nzg5MSwiZXhwIjoxNjY5OTAxNDkxfQ.S-mXiQcPA51myLrNclXt6khq1tAaGk_5sDK1umte2Ik */
-        localStorage.getItem("userToken")
-          ? this.$router.push({ name: "home" })
-          : alert("Token olusturma basarısız");
+        // localStorage.getItem("userToken")
+        //   ? this.$router.push({ name: "home" })
+        //   : alert("Token olusturma basarısız");
+        if (localStorage.getItem("userToken")) {
+          this.$store.dispatch("roleState/roleControl", response.data.userRole);
+          if (response.data.userRole == 1) {
+            this.$router.push({ name: "admin" });
+          } else if (response.data.userRole == 0) {
+            this.$router.push({ name: "home" });
+          }
+        } else {
+          alert("Token olusturma basarısız");
+        }
       });
     },
   },
