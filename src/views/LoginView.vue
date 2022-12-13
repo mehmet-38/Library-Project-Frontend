@@ -49,42 +49,53 @@
 </template>
 <script>
 import appAxios from "@/utils/appAxios";
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength, email } from "@vuelidate/validators";
 export default {
   data() {
     return {
+      v$: useVuelidate(),
       email: "",
       password: "",
     };
   },
+  validations() {
+    return {
+      email: { required, minLength: minLength(8), email },
+      password: { required, minLength: minLength(6) },
+    };
+  },
   methods: {
     Login() {
+      this.v$.$validate();
       const userObject = {
         email: this.email,
         password: this.password,
       };
+      if (!this.v$.$error) {
+        appAxios({
+          url: "/login",
+          method: "POST",
+          data: userObject,
+        }).then((response) => {
+          localStorage.setItem("userToken", response.data.token);
 
-      appAxios({
-        url: "/login",
-        method: "POST",
-        data: userObject,
-      }).then((response) => {
-        localStorage.setItem("userToken", response.data.token);
+          if (localStorage.getItem("userToken")) {
+            //send auth user role to userRole
 
-        /*eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWV0QGdtYWlsLmNvbSIsInVzZXJJZCI6IjYzODFlNDhlNDIyNzJhODgyZWUxMDhjZCIsImlhdCI6MTY2OTg5Nzg5MSwiZXhwIjoxNjY5OTAxNDkxfQ.S-mXiQcPA51myLrNclXt6khq1tAaGk_5sDK1umte2Ik */
-        // localStorage.getItem("userToken")
-        //   ? this.$router.push({ name: "home" })
-        //   : alert("Token olusturma basarısız");
-        if (localStorage.getItem("userToken")) {
-          this.$store.dispatch("roleState/roleControl", response.data.userRole);
-          if (response.data.userRole == 1) {
-            this.$router.push({ name: "admin" });
-          } else if (response.data.userRole == 0) {
-            this.$router.push({ name: "home" });
+            localStorage.setItem("currentUserRole", response.data.userRole);
+            if (response.data.userRole == 1) {
+              this.$router.push({ name: "admin" });
+            } else if (response.data.userRole == 0) {
+              this.$router.push({ name: "home" });
+            }
+          } else {
+            alert("Token olusturma basarısız");
           }
-        } else {
-          alert("Token olusturma basarısız");
-        }
-      });
+        });
+      } else {
+        alert("validation failed");
+      }
     },
   },
 };

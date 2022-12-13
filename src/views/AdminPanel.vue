@@ -1,9 +1,13 @@
-<template lang="">
+<template>
   <div>
-    <h1>ADMİN</h1>
+    <NavBar />
+    <AddBookCard />
   </div>
 </template>
 <script>
-export default {};
+import AddBookCard from "@/components/AddBookCard.vue";
+import NavBar from "@/components/NavBar.vue";
+
+export default { components: { NavBar, AddBookCard } };
 </script>
-<style lang=""></style>
+<style></style>

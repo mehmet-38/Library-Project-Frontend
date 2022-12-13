@@ -14,7 +14,7 @@
           </li>
           <div style="display: flex; justify-content: end; position: relative">
             <li class="nav-item">
-              <a class="nav-link" href="#">Profil </a>
+              <a class="nav-link" href="#">Profil{{ userRole }} </a>
             </li>
           </div>
         </ul>
@@ -23,7 +23,17 @@
   </div>
 </template>
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  data() {
+    return {
+      userRole: null,
+    };
+  },
+  computed: {
+    ...mapGetters("roleState", ["roleGetters"]),
+  },
+};
 </script>
 <style>
 #nav-font {

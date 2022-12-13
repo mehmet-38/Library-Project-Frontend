@@ -4,18 +4,16 @@ import HomeView from "@/views/HomeView";
 import BookListView from "@/views/BookListView";
 import RegisterView from "@/views/RegisterView";
 import AdminPanel from "@/views/AdminPanel";
-import store from "@/store";
-function guardMyroute(to, from, next) {
-  var isAdmin = false;
 
-  if (store.state.roleState.userRole == "1") isAdmin = true;
+function guardAdminRoute(to, from, next) {
+  var isAdmin;
+  if (localStorage.getItem("currentUserRole") == "1") isAdmin = true;
   else isAdmin = false;
   if (isAdmin) {
-    //console.log(store);
-    next(); // allow to enter route
+    next(); // allow route
   } else {
-    //console.log(store.state.roleState.userRole);
-    next("/login"); // go to '/login';
+    alert("Yetkisiz islem");
+    next("/"); // go to '/home';
   }
 }
 const routes = [
@@ -42,7 +40,7 @@ const routes = [
   {
     path: "/admin",
     name: "admin",
-    beforeEnter: guardMyroute,
+    beforeEnter: guardAdminRoute,
     component: AdminPanel,
   },
 ];
