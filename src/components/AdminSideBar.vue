@@ -16,17 +16,16 @@
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">
+          <router-link to="/admin" class="nav-link link-dark">
             <font-awesome-icon icon="fa-solid fa-home" class="me-2 font-icon" />
-
             Home
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="#" class="nav-link link-dark">
+          <router-link class="nav-link link-dark" to="/admin/add-user">
             <font-awesome-icon icon="fa-solid fa-user" class="me-2 font-icon" />
             Kullanıcı Ekle
-          </a>
+          </router-link>
         </li>
       </ul>
       <hr />

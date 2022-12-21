@@ -28,7 +28,7 @@ export default {
       userList: [],
     };
   },
-  mounted() {
+  created() {
     appAxios({
       url: "/users",
       method: "GET",

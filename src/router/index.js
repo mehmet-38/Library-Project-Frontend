@@ -4,7 +4,7 @@ import HomeView from "@/views/HomeView";
 import BookListView from "@/views/BookListView";
 import RegisterView from "@/views/RegisterView";
 import AdminPanel from "@/views/AdminPanel";
-
+import UserAdd from "@/views/UserAdd";
 function guardAdminRoute(to, from, next) {
   var isAdmin;
   if (localStorage.getItem("currentUserRole") == "1") isAdmin = true;
@@ -43,10 +43,16 @@ const routes = [
     beforeEnter: guardAdminRoute,
     component: AdminPanel,
   },
+  {
+    path: "/admin/add-user",
+    name: "add-user",
+    component: UserAdd,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
+  linkExactActiveClass: "active",
   routes,
 });
 

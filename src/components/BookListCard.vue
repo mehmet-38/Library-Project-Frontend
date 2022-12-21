@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <div class="row">
+      <div class="alert alert-success" v-show="show" role="alert">
+        This is a secondary alert—check it out!
+      </div>
       <div
         class="col-md-6 col-sm-3 col-lg-3"
         v-for="book in bookList"
@@ -14,7 +17,10 @@
               {{ book.book_author }}
             </p>
             <p class="card-text text-muted">{{ book.book_type }}</p>
-            <a style="cursor: pointer" @click="getBook" class="btn btn-primary"
+            <a
+              style="cursor: pointer"
+              @click="borrowBook(book._id)"
+              class="btn btn-primary"
               >Emanet Al</a
             >
           </div>
@@ -30,6 +36,7 @@ export default {
   data() {
     return {
       bookList: [],
+      show: false,
     };
   },
   computed: {
@@ -44,13 +51,27 @@ export default {
       method: "GET",
     }).then((book_response) => {
       this.bookList = book_response.data;
+      console.log(this.bookList);
     });
   },
   methods: {
-    getBook() {
-      this.loggedUser
-        ? alert("basarili emanet alma")
-        : alert("lutfen giris yapınız");
+    borrowBook(bookId) {
+      const borrowObject = {
+        bookId: bookId,
+      };
+      if (this.loggedUser) {
+        appAxios({
+          url: "/borrow-book",
+          method: "POST",
+          data: borrowObject,
+        }).then((borrow_reponse) => {
+          console.log(borrow_reponse.data);
+          this.show = true;
+          setTimeout(() => {
+            this.show = false;
+          }, 2000);
+        });
+      }
     },
   },
 };
