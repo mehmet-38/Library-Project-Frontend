@@ -39,7 +39,11 @@
               </button>
             </div>
             <div class="d-block text-center mt-2 small">
-              Kayıtlı değilsen <a href="/register">Kayıt Ol</a>
+              Kayıtlı değilsen
+              <router-link to="/register">Kayıt Ol</router-link>
+            </div>
+            <div class="d-block text-center mt-2 small">
+              <router-link to="/forgot-password">Şifremi unuttum</router-link>
             </div>
           </div>
         </div>

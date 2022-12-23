@@ -47,7 +47,7 @@
               </button>
             </div>
             <div class="d-block text-center mt-2 small">
-              Kayıtlı isen <a href="/login">Giriş Yap</a>
+              Kayıtlı isen <router-link to="/login">Giriş Yap</router-link>
             </div>
           </div>
         </div>

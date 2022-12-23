@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="alert alert-success" v-show="show" role="alert">
-        This is a secondary alert—check it out!
+        Başarılı Ödünç Alma
       </div>
       <div
         class="col-md-6 col-sm-3 col-lg-3"
@@ -69,7 +69,7 @@ export default {
           this.show = true;
           setTimeout(() => {
             this.show = false;
-          }, 2000);
+          }, 3000);
         });
       }
     },

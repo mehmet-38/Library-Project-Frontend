@@ -5,6 +5,9 @@ import BookListView from "@/views/BookListView";
 import RegisterView from "@/views/RegisterView";
 import AdminPanel from "@/views/AdminPanel";
 import UserAdd from "@/views/UserAdd";
+import UserProfile from "@/views/UserProfile";
+import ForgotPasswordView from "@/views/ForgotPasswordView";
+import ResetPasswordView from "@/views/ResetPasswordView";
 function guardAdminRoute(to, from, next) {
   var isAdmin;
   if (localStorage.getItem("currentUserRole") == "1") isAdmin = true;
@@ -47,6 +50,21 @@ const routes = [
     path: "/admin/add-user",
     name: "add-user",
     component: UserAdd,
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: UserProfile,
+  },
+  {
+    path: "/forgot-password",
+    name: "forgot-password",
+    component: ForgotPasswordView,
+  },
+  {
+    path: "/reset-password",
+    name: "reset-password",
+    component: ResetPasswordView,
   },
 ];
 

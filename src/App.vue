@@ -3,9 +3,5 @@
 </template>
 
 <script>
-export default {
-  created() {
-    console.log("app created");
-  },
-};
+export default {};
 </script>

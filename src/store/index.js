@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import roleState from "./modules/role-state";
+
 const user = localStorage.getItem("userToken");
 export default createStore({
   state: {
@@ -18,8 +18,5 @@ export default createStore({
         ? context.commit("loggedStatus", true)
         : context.commit("loggedStatus", false);
     },
-  },
-  modules: {
-    roleState,
   },
 });

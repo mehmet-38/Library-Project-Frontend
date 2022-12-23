@@ -7,14 +7,16 @@
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="#">CBU Kütüphane</a>
+            <router-link class="nav-link active" to="/"
+              >CBU Kütüphane</router-link
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/book-list">Kitaplar</a>
+            <router-link class="nav-link" to="/book-list">Kitaplar</router-link>
           </li>
           <div style="display: flex; justify-content: end; position: relative">
             <li class="nav-item">
-              <a class="nav-link" href="#">Profil{{ userRole }} </a>
+              <router-link class="nav-link" to="/profile">Profil </router-link>
             </li>
           </div>
         </ul>
@@ -23,17 +25,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-export default {
-  data() {
-    return {
-      userRole: null,
-    };
-  },
-  computed: {
-    ...mapGetters("roleState", ["roleGetters"]),
-  },
-};
+export default {};
 </script>
 <style>
 #nav-font {
