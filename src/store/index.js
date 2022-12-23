@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
-
-const user = localStorage.getItem("userToken");
+import user from "./modules/user";
 export default createStore({
   state: {
     loggedUser: null,
@@ -18,5 +17,8 @@ export default createStore({
         ? context.commit("loggedStatus", true)
         : context.commit("loggedStatus", false);
     },
+  },
+  modules: {
+    user,
   },
 });

@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="col-9">
-        <ProfileInfo v-if="openProfile == true" />
+        <ProfileInfo v-if="openProfile == true" :user="user" />
 
         <MyBookCard v-if="openMyBook == true" />
       </div>
@@ -68,14 +68,21 @@
 import ProfileInfo from "@/components/ProfileInfo.vue";
 import NavBarVue from "@/components/NavBar.vue";
 import MyBookCard from "@/components/MyBookCard.vue";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      openProfile: true,
+      openProfile: false,
       openMyBook: false,
     };
   },
+  computed: {
+    ...mapState("user", ["user"]),
+  },
   components: { NavBarVue, ProfileInfo, MyBookCard },
+  created() {
+    this.$store.dispatch("user/getUser");
+  },
 };
 </script>
 <style lang=""></style>

@@ -3,26 +3,27 @@
     <div class="card mt-3 ms-5" style="width: 40%">
       <div class="card-body">
         <h5 class="card-title">Hesap Bilgileri</h5>
+
         <input
           type="text"
           class="form-control mb-3"
           required
-          value="Mehmet"
           name="name"
+          :value="user.name"
         />
 
         <input
           type="email"
           class="form-control mb-3"
           required
-          value="mehmet@gmail.com"
+          :value="user.email"
           name="email"
         />
         <input
           type="text"
           class="form-control mb-3"
           required
-          value="123456"
+          :value="user.password"
           name="password"
         />
 
@@ -34,6 +35,15 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  props: {
+    user: {
+      type: Object,
+    },
+  },
+};
 </script>
 <style lang=""></style>
