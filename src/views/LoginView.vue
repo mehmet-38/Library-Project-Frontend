@@ -92,6 +92,8 @@ export default {
               this.$router.push({ name: "admin" });
             } else if (response.data.userRole == 0) {
               this.$router.push({ name: "home" });
+            } else if (response.data.userRole == 2) {
+              this.$router.push({ name: "editor" });
             }
           } else {
             alert("Token olusturma basarısız");

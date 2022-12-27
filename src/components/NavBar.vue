@@ -19,13 +19,29 @@
               <router-link class="nav-link" to="/profile">Profil </router-link>
             </li>
           </div>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active fw-bold"
+              style="display: flex; justify-content: end"
+              href="/login"
+              @click="logOut"
+              >Çıkış Yap
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    logOut() {
+      localStorage.clear();
+    },
+  },
+};
 </script>
 <style>
 #nav-font {

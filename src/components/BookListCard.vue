@@ -44,8 +44,6 @@ export default {
   },
   created() {
     this.$store.dispatch("loggedControl");
-  },
-  mounted() {
     appAxios({
       url: "/book",
       method: "GET",
@@ -54,6 +52,7 @@ export default {
       console.log(this.bookList);
     });
   },
+  mounted() {},
   methods: {
     borrowBook(bookId) {
       const borrowObject = {

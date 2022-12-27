@@ -8,6 +8,7 @@ import UserAdd from "@/views/UserAdd";
 import UserProfile from "@/views/UserProfile";
 import ForgotPasswordView from "@/views/ForgotPasswordView";
 import ResetPasswordView from "@/views/ResetPasswordView";
+import EditorPanel from "@/views/EditorPanel";
 function guardAdminRoute(to, from, next) {
   var isAdmin;
   if (localStorage.getItem("currentUserRole") == "1") isAdmin = true;
@@ -18,6 +19,12 @@ function guardAdminRoute(to, from, next) {
     alert("Yetkisiz islem");
     next("/"); // go to '/home';
   }
+}
+function guardEditorRoute(to, from, next) {
+  var isEditor;
+  if (localStorage.getItem("currentUserRole") == "2") isEditor = true;
+  else isEditor = false;
+  isEditor ? next() : next("/");
 }
 const routes = [
   {
@@ -65,6 +72,12 @@ const routes = [
     path: "/reset-password/:resetToken",
     name: "reset-password",
     component: ResetPasswordView,
+  },
+  {
+    path: "/editor",
+    name: "editor",
+    beforeEnter: guardEditorRoute,
+    component: EditorPanel,
   },
 ];
 

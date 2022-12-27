@@ -14,14 +14,12 @@
   </div>
 </template>
 <script>
-import AddBookCard from "@/components/AddBookCard.vue";
 import AdminSideBar from "@/components/AdminSideBar.vue";
 
-import NavBar from "@/components/NavBar.vue";
 import UserList from "@/components/UserList.vue";
 
 export default {
-  components: { NavBar, AddBookCard, AdminSideBar, UserList },
+  components: { AdminSideBar, UserList },
   data() {
     return {};
   },
