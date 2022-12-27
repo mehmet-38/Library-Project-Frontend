@@ -13,9 +13,12 @@
             id="password"
             name="password"
             class="form-control my-3"
+            v-model="password"
           />
         </div>
-        <a href="#" class="btn btn-primary w-100">Gönder</a>
+        <a href="#" class="btn btn-primary w-100" @click="resetPassword"
+          >Gönder</a
+        >
         <div class="d-flex justify-content-between mt-4">
           <router-link class="" to="/login">Login</router-link>
         </div>
@@ -24,6 +27,24 @@
   </div>
 </template>
 <script>
-export default {};
+import appAxios from "@/utils/appAxios";
+export default {
+  data() {
+    return {
+      password: "",
+    };
+  },
+  methods: {
+    resetPassword() {
+      appAxios({
+        url: `/reset-password/${this.$route.params.resetToken}`,
+        method: "PATCH",
+        data: { password: this.password },
+      }).then((reset_response) => {
+        console.log(reset_response);
+      });
+    },
+  },
+};
 </script>
 <style lang=""></style>

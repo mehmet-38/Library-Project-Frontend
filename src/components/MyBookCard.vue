@@ -20,10 +20,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="col-3">Kuyucaklo Yusuf</td>
-                      <td class="col-3">Sabahattin</td>
-                      <td class="col-2">Roman</td>
+                    <tr v-for="book in bookList" :key="book._id">
+                      <td class="col-3">{{ book.book_name }}</td>
+                      <td class="col-3">{{ book.book_author }}</td>
+                      <td class="col-2">{{ book.book_type }}</td>
                       <td>
                         <button class="btn btn-success">Kitabı Bırak</button>
                       </td>
@@ -39,6 +39,22 @@
   </div>
 </template>
 <script>
-export default {};
+import appAxios from "@/utils/appAxios";
+export default {
+  data() {
+    return {
+      bookList: [],
+    };
+  },
+
+  created() {
+    appAxios({
+      url: "/my-book",
+      method: "GET",
+    }).then((book_response) => {
+      this.bookList = book_response.data;
+    });
+  },
+};
 </script>
 <style lang=""></style>

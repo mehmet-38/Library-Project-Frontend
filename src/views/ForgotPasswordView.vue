@@ -11,14 +11,16 @@
           giriniz.
         </p>
         <div class="form-outline">
+          <label for="email" style="float: left">Email</label>
           <input
             type="email"
             id="email"
             name="email"
+            v-model="email"
             class="form-control my-3"
           />
         </div>
-        <a href="#" class="btn btn-primary w-100">Gönder</a>
+        <a href="#" class="btn btn-primary w-100" @click="sendEmail">Gönder</a>
         <div class="d-flex justify-content-between mt-4">
           <router-link class="" to="/login">Login</router-link>
           <router-link class="" to="/register">Register</router-link>
@@ -28,6 +30,24 @@
   </div>
 </template>
 <script>
-export default {};
+import appAxios from "@/utils/appAxios";
+export default {
+  data() {
+    return {
+      email: "",
+    };
+  },
+  methods: {
+    sendEmail() {
+      appAxios({
+        url: "/forgot-password",
+        method: "POST",
+        data: { email: this.email },
+      }).then((result) => {
+        console.log(result);
+      });
+    },
+  },
+};
 </script>
 <style lang=""></style>
